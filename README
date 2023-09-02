@@ -1,0 +1,20 @@
+Graful orientat citit din fisierul de input il retin ca pe o matrice de adiacenta.
+Pentru a rezolva problema K-CLIQUE cu ajutorul unei formule SAT, vom lua 3 cazuri:
+
+1. ne asiguram ca exista un "al i-lea nod" in clica adaugand k clauze, una pentru fiecare
+nod din clica cu variabile de forma xij, unde j este numarul nodului si i ia valori de la 1 la k.
+Cum fiecare clauza trebuie sa aiba cel putin o variabila adevarata, exista cel putin un al i-lea
+nod in clica. => vom avea k clauze
+
+2. ne asiguram ca fiecare nod din clica este unic. Clauzele vor fi de forma xiv si xjv (negate) =>
+nu pot fi amandoua variabilele adevarate pentru ca ar insemna ca nodul v este si al i-lea element 
+si al j-lea element din clica. => vom avea (((k - 1) * k) / 2) * number_of_nodes clauze
+
+3. ne asiguram ca oricare 2 noduri din clica sunt adiacente. Clauzele vor fi de forma xiv si xju
+(negate), respectiv xiu si xjv (negate) , unde u si v sunt noduri neadiacente => nu pot fi amandoua 
+variabilele adevarate pentru ca ar insemna ca u si v sunt in clica dar nu au muchie intre ele. =>
+vom avea nr_noduri_neadiacente * ((k - 1) * k) clauze
+
+Afisarea variabilelor din SAT in fisierul de output se face dupa formula:
+xij = (i - 1) * number_of_nodes + j => daca avem k * number_of_nodes variabile, atunci
+(i - 1) * number_of_nodes + j va lua valori de la 1 la k * number_of_nodes
